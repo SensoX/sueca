@@ -27,12 +27,20 @@
 
 typedef struct _SuecaPlayer SuecaPlayer;
 
-SuecaPlayer *sueca_player_new(const gchar *);
-void sueca_player_delete(SuecaPlayer *);
-void sueca_player_set_name(SuecaPlayer *, const gchar *);
-gchar *sueca_player_get_name(const SuecaPlayer *player);
+struct _SuecaPluginPlayer
+{
+	gushort cod;
+	gchar *name;
+	
+};
 
-void sueca_player_printf(const SuecaPlayer *);
+/* SuecaPlayer *sueca_player_new(const gchar *);
+ * void sueca_player_delete(SuecaPlayer *);
+ * void sueca_player_set_name(SuecaPlayer *, const gchar *);
+ * gchar *sueca_player_get_name(const SuecaPlayer *player);
+ * 
+ * void sueca_player_printf(const SuecaPlayer *);
+ */
 
 #endif /* _PLAYER_H_ */
 

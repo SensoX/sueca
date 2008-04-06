@@ -62,7 +62,7 @@ int
 main(int argc, char *argv[])
 {
 	SuecaBaralho *baralho;
-	SuecaPlayer *player;
+/* 	SuecaPlayer *player;  */
 	//SuecaCarta *carta;
 	//int i;
 	
@@ -77,12 +77,13 @@ main(int argc, char *argv[])
 	
 	printf("SUECA\n");
 	baralho = sueca_deck_new();
-	player = sueca_player_new("marco");
-	sueca_player_printf(player);
-	sueca_player_delete(player);
-	player = sueca_player_new("andré");
-	sueca_player_printf(player);
-	sueca_player_delete(player);
+/* 	player = sueca_player_new("marco");
+ * 	sueca_player_printf(player);
+ * 	sueca_player_delete(player);
+ * 	player = sueca_player_new("andré");
+ * 	sueca_player_printf(player);
+ * 	sueca_player_delete(player);
+ */
 	
 	//gtk_main();
 	return 0;
