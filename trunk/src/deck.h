@@ -21,7 +21,8 @@
 #ifndef _DECK_H_
 #define _DECK_H_
 
-#define NUMBER_OF_CARDS 40
+#define SUECA_DECK_SIZE 40
+#define SUECA_SUIT_SIZE 40/4
 
 #include <glib.h>
 

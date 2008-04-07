@@ -31,6 +31,7 @@ struct _SuecaPluginPlayer
 {
 	gushort cod;
 	gchar *name;
+	void (*set_mao)(void);
 	
 };
 

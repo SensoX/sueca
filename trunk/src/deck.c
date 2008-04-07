@@ -25,27 +25,26 @@
 
 struct _SuecaBaralho
 {
-	SuecaCarta *carta[NUMBER_OF_CARDS];
-	gint size;
+	GList *cartas;
 };
 
-void sueca_deck_push(SuecaBaralho *baralho, SuecaCarta *carta);
+void sueca_deck_push(SuecaBaralho *baralho, const SuecaCarta *carta);
 
 SuecaBaralho *
 sueca_deck_new()
 {
 	gint i, j;
-	SuecaBaralho *baralho = g_new0(SuecaBaralho, 1);
-		
-	baralho->size = 0;
-	for(i = ESPADAS; i <= OUROS; i+= 10)
+	SuecaBaralho *baralho = g_new0 (SuecaBaralho, 1);
+	baralho->cartas = NULL;
+	
+	for(i = ESPADAS; i <= OUROS; i+= SUECA_SUIT_SIZE)
 	{
 		for(j = DUQUE; j <= AS; j++)
 		{
-			baralho->carta[baralho->size] = sueca_cards_new (i, j);
-			baralho->size++;
+			baralho->cartas = g_list_prepend (baralho->cartas, (gpointer)sueca_cards_new(i, j));
 		}
 	}
+	baralho->cartas = g_list_reverse (baralho->cartas);
 	
 	sueca_deck_shuffle(baralho);
 	
@@ -55,20 +54,34 @@ sueca_deck_new()
 void
 sueca_deck_shuffle(SuecaBaralho *baralho)
 {
-	gint k;
-	SuecaCarta *temp;
+	gint size, k;
+	gpointer temp;
+	GList *gltemp;
 	
 	if(baralho == NULL)
 		return;
 	
+	size = g_list_length (baralho->cartas);
 	srandom(time(NULL));
 	
-	for(k = 0; k < baralho->size; k++)
+	for(k = 0; k < size; k++)
 	{
-		gint r = random() % NUMBER_OF_CARDS;
-		temp = baralho->carta[k];
-		baralho->carta[k] = baralho->carta[r];
-		baralho->carta[r] = temp;
+		gint r = random() % SUECA_DECK_SIZE;
+		
+		temp = g_list_nth_data (baralho->cartas, k);
+		gltemp = g_list_nth (baralho->cartas, k);
+		
+		baralho->cartas = g_list_insert (baralho->cartas, g_list_nth_data (baralho->cartas, r), k);
+		
+		baralho->cartas = g_list_remove_link (baralho->cartas, gltemp);
+		g_list_free_1 (gltemp);
+		
+		gltemp = g_list_nth (baralho->cartas, r);
+		
+		baralho->cartas = g_list_insert (baralho->cartas, temp, r);
+		
+		baralho->cartas = g_list_remove_link (baralho->cartas, gltemp);
+		g_list_free_1 (gltemp);
 	}
 }
 
@@ -82,7 +95,7 @@ sueca_deck_cut(SuecaBaralho *baralho)
 		return;
 	
 	srandom(time(NULL));
-	r = 1 + random() % (NUMBER_OF_CARDS - 1);
+	r = 1 + random() % (SUECA_DECK_SIZE - 1);
 	
 	b1 = g_new0(SuecaBaralho, 1);
 	b2 = g_new0(SuecaBaralho, 1);
@@ -91,7 +104,7 @@ sueca_deck_cut(SuecaBaralho *baralho)
 	{
 		sueca_deck_push(b1, sueca_deck_pop(baralho));
 	}
-	for(k = r; k < NUMBER_OF_CARDS; k++)
+	for(k = r; k < SUECA_DECK_SIZE; k++)
 	{
 		sueca_deck_push(b2, sueca_deck_pop(baralho));
 	}
@@ -100,38 +113,44 @@ sueca_deck_cut(SuecaBaralho *baralho)
 	{
 		sueca_deck_push(baralho, sueca_deck_pop(b1));
 	}
-	for(k = r; k < NUMBER_OF_CARDS; k++)
+	for(k = r; k < SUECA_DECK_SIZE; k++)
 	{
 		sueca_deck_push(baralho, sueca_deck_pop(b2));
 	}
 }
 
 void
-sueca_deck_push(SuecaBaralho *baralho, SuecaCarta *carta)
+sueca_deck_push(SuecaBaralho *baralho, const SuecaCarta *carta)
 {
+	gint size;
+	
 	if(baralho == NULL || carta == NULL)
 		return;
 	
-	if(baralho->size + 1 <= 40)
-	{
-		baralho->carta[baralho->size] = carta;
-		baralho->size++;
-	}
+	size = g_list_length (baralho->cartas);
+	
+	if(size < SUECA_DECK_SIZE)
+		baralho->cartas = g_list_append (baralho->cartas, (gpointer)carta);
 }
 
 SuecaCarta *
 sueca_deck_pop(SuecaBaralho *baralho)
 {
 	SuecaCarta *carta;
+	GList *gltemp;
+	gint size;
 	
 	if(baralho == NULL)
 		return NULL;
+	
+	size = g_list_length (baralho->cartas);
 
-	if(baralho->size - 1 >= 0)
+	if(size > 0)
 	{
-		baralho->size--;
-		carta = baralho->carta[baralho->size];
-		baralho->carta[baralho->size] = NULL;
+		carta = g_list_nth_data (baralho->cartas, size - 1);
+		gltemp = g_list_nth (baralho->cartas, size - 1);
+		baralho->cartas = g_list_remove_link (baralho->cartas, gltemp);
+		g_list_free_1 (gltemp);
 		return carta;
 	}
 	return NULL;
@@ -140,12 +159,14 @@ sueca_deck_pop(SuecaBaralho *baralho)
 void
 sueca_deck_printf(const SuecaBaralho *baralho)
 {
-	gint k;
+	gint size, k;
 	
 	if(baralho == NULL)
 		return;
 	
-	for(k = 0; k < baralho->size; k++)
-		sueca_cards_printf(baralho->carta[k]);
+	size = g_list_length (baralho->cartas);
+	
+	for(k = 0; k < size; k++)
+		sueca_cards_printf (g_list_nth_data (baralho->cartas, k));
 	printf("\n");
 }

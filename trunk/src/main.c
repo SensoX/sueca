@@ -76,7 +76,12 @@ main(int argc, char *argv[])
 	gtk_init(&argc, &argv);
 	
 	printf("SUECA\n");
-	baralho = sueca_deck_new();
+	baralho = sueca_deck_new ();
+	sueca_deck_printf (baralho);
+/* 	printf("SUECA\n");
+ * 	sueca_deck_push (baralho, sueca_deck_pop (baralho));
+ * 	sueca_deck_printf (baralho);
+ */
 /* 	player = sueca_player_new("marco");
  * 	sueca_player_printf(player);
  * 	sueca_player_delete(player);
