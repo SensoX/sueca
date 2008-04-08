@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <gtodo>
-  <category title="Personal" place="0"/>
+  <category title="Personal" place="0">
+    <item>
+      <attribute id="1207695802" priority="1" done="0" start_date="733141" enddate="99999999" notify="0" endtime="-60" last_edited="1207695802"/>
+      <summary>test hand</summary>
+      <comment></comment>
+    </item>
+  </category>
   <category title="Business" place="1"/>
   <category title="Unfiled" place="2"/>
 </gtodo>

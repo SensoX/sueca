@@ -46,7 +46,7 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_sueca_OBJECTS = main.$(OBJEXT) deck.$(OBJEXT) cards.$(OBJEXT) player.$(OBJEXT) hand.$(OBJEXT)
+am_sueca_OBJECTS = cards.$(OBJEXT) deck.$(OBJEXT)  hand.$(OBJEXT) player.$(OBJEXT) table.$(OBJEXT) main.$(OBJEXT)
 sueca_OBJECTS = $(am_sueca_OBJECTS)
 am__DEPENDENCIES_1 =
 sueca_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -242,15 +242,17 @@ AM_CFLAGS = \
 	 -g
 
 sueca_SOURCES = \
-	main.c \
-	deck.c \
-	deck.h \
 	cards.c \
 	cards.h \
+	deck.c \
+	deck.h \
+	hand.c \
+	hand.h \
 	player.c \
 	player.h \
-	hand.c \
-	hand.h
+	table.c \
+	table.h \
+	main.c
 
 sueca_LDFLAGS = \
 	-Wl,--export-dynamic
@@ -327,11 +329,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/main.Po
-include ./$(DEPDIR)/deck.Po
 include ./$(DEPDIR)/cards.Po
-include ./$(DEPDIR)/player.Po
+include ./$(DEPDIR)/deck.Po
 include ./$(DEPDIR)/hand.Po
+include ./$(DEPDIR)/player.Po
+include ./$(DEPDIR)/table.Po
+include ./$(DEPDIR)/main.Po
 
 .c.o:
 	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

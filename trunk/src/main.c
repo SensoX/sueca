@@ -30,7 +30,9 @@
 
 #include <cards.h>
 #include <deck.h>
+#include <hand.h>
 #include <player.h>
+#include <table.h>
 
 
 
@@ -89,7 +91,6 @@ main(int argc, char *argv[])
  * 	sueca_player_printf(player);
  * 	sueca_player_delete(player);
  */
-	
 	sueca_deck_delete (baralho);
 	
 	//gtk_main();

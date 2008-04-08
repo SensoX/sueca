@@ -18,42 +18,23 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef _CARDS_H_
-#define _CARDS_H_
+#ifndef _HAND_H_
+#define _HAND_H_
+
+#define SUECA_HAND_SIZE 10
 
 #include <glib.h>
 
-typedef struct _SuecaCarta SuecaCarta;
+#include <cards.h>
 
-typedef enum
-{
-	ESPADAS = 0,	/* spades */
-	COPAS = 10,		/* hearts */
-	PAUS = 20,		/* clubs */
-	OUROS = 30,		/* diamonds */
-} SuecaCardsNaipe;	/* suit */
+typedef struct _SuecaMao SuecaMao;
 
-typedef enum
-{
-	DUQUE = 1,		/* Two */
-	TERMO,			/* Three */
-	QUADRA,			/* Four */
-	QUINA,			/* Five */
-	SENA,			/* Six */
-    DAMA,			/* Queen */
-	VALETE,			/* Jack */
-	REI,			/* King */
-	BISCA,			/* Seven */
-	AS				/* ACE */
-} SuecaCardsTipo;	/* rank */
-
-SuecaCarta *sueca_cards_new(const SuecaCardsNaipe, const SuecaCardsTipo);
-void sueca_cards_delete(SuecaCarta *);
-SuecaCardsNaipe sueca_cards_get_naipe(const SuecaCarta *);
-SuecaCardsTipo sueca_cards_get_tipo(const SuecaCarta *);
-gint sueca_cards_get_type_value(const SuecaCardsTipo);
+SuecaMao *sueca_hand_new();
+void sueca_hand_delete(SuecaMao *);
+void sueca_hand_sort(SuecaMao *);
+void sueca_hand_insert(SuecaMao *, const SuecaCarta *, const gint);
+SuecaCarta *sueca_hand_remove(SuecaMao *, const gint);
+void sueca_hand_printf(const SuecaMao *);
 
 
-void sueca_cards_printf(const SuecaCarta *);
-
-#endif /* _CARDS_H_ */
+#endif /* _HAND_H_ */

@@ -14,7 +14,7 @@ hostname = kkl
 uname -m = i686
 uname -r = 2.6.24-15-generic
 uname -s = Linux
-uname -v = #1 SMP Fri Apr 4 03:48:31 UTC 2008
+uname -v = #1 SMP Tue Apr 8 00:33:51 UTC 2008
 
 /usr/bin/uname -p = unknown
 /bin/uname -X     = unknown

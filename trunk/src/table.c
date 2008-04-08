@@ -18,42 +18,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef _CARDS_H_
-#define _CARDS_H_
+#include <table.h>
 
-#include <glib.h>
-
-typedef struct _SuecaCarta SuecaCarta;
-
-typedef enum
-{
-	ESPADAS = 0,	/* spades */
-	COPAS = 10,		/* hearts */
-	PAUS = 20,		/* clubs */
-	OUROS = 30,		/* diamonds */
-} SuecaCardsNaipe;	/* suit */
-
-typedef enum
-{
-	DUQUE = 1,		/* Two */
-	TERMO,			/* Three */
-	QUADRA,			/* Four */
-	QUINA,			/* Five */
-	SENA,			/* Six */
-    DAMA,			/* Queen */
-	VALETE,			/* Jack */
-	REI,			/* King */
-	BISCA,			/* Seven */
-	AS				/* ACE */
-} SuecaCardsTipo;	/* rank */
-
-SuecaCarta *sueca_cards_new(const SuecaCardsNaipe, const SuecaCardsTipo);
-void sueca_cards_delete(SuecaCarta *);
-SuecaCardsNaipe sueca_cards_get_naipe(const SuecaCarta *);
-SuecaCardsTipo sueca_cards_get_tipo(const SuecaCarta *);
-gint sueca_cards_get_type_value(const SuecaCardsTipo);
-
-
-void sueca_cards_printf(const SuecaCarta *);
-
-#endif /* _CARDS_H_ */
+#include <stdio.h>
