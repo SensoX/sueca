@@ -90,6 +90,8 @@ main(int argc, char *argv[])
  * 	sueca_player_delete(player);
  */
 	
+	sueca_deck_delete (baralho);
+	
 	//gtk_main();
 	return 0;
 }

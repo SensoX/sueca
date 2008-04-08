@@ -37,6 +37,12 @@ sueca_cards_new(const SuecaCardsNaipe naipe, const SuecaCardsTipo tipo)
 	return carta;
 }
 
+void
+sueca_cards_delete(SuecaCarta *carta)
+{
+	g_free(carta);
+}
+
 SuecaCardsNaipe
 sueca_cards_get_naipe(const SuecaCarta *carta)
 {

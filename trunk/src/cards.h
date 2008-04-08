@@ -48,6 +48,7 @@ typedef enum
 } SuecaCardsTipo;	/* rank */
 
 SuecaCarta *sueca_cards_new(const SuecaCardsNaipe, const SuecaCardsTipo);
+void sueca_cards_delete(SuecaCarta *);
 SuecaCardsNaipe sueca_cards_get_naipe(const SuecaCarta *);
 SuecaCardsTipo sueca_cards_get_tipo(const SuecaCarta *);
 int sueca_cards_get_type_value(const SuecaCardsTipo);

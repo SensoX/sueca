@@ -46,7 +46,7 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_sueca_OBJECTS = main.$(OBJEXT) deck.$(OBJEXT) cards.$(OBJEXT) player.$(OBJEXT)
+am_sueca_OBJECTS = main.$(OBJEXT) deck.$(OBJEXT) cards.$(OBJEXT) player.$(OBJEXT) hand.$(OBJEXT)
 sueca_OBJECTS = $(am_sueca_OBJECTS)
 am__DEPENDENCIES_1 =
 sueca_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -76,13 +76,13 @@ am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/nok/Projects/Sueca/missing --run aclocal-1.10
+ACLOCAL = ${SHELL} /home/nok/Projects/sueca/missing --run aclocal-1.10
 ALL_LINGUAS = 
-AMTAR = ${SHELL} /home/nok/Projects/Sueca/missing --run tar
+AMTAR = ${SHELL} /home/nok/Projects/sueca/missing --run tar
 AR = ar
-AUTOCONF = ${SHELL} /home/nok/Projects/Sueca/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/nok/Projects/Sueca/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/nok/Projects/Sueca/missing --run automake-1.10
+AUTOCONF = ${SHELL} /home/nok/Projects/sueca/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/nok/Projects/sueca/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/nok/Projects/sueca/missing --run automake-1.10
 AWK = gawk
 CATALOGS = 
 CATOBJEXT = .gmo
@@ -150,7 +150,7 @@ LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LN_S = ln -s
 LTLIBOBJS = 
 MAINT = #
-MAKEINFO = ${SHELL} /home/nok/Projects/Sueca/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/nok/Projects/sueca/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = ./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
@@ -180,10 +180,10 @@ SUECA_LIBS = -lglade-2.0 -lgtk-x11-2.0 -lxml2 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixb
 USE_NLS = yes
 VERSION = 0.1
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/nok/Projects/Sueca/src
-abs_srcdir = /home/nok/Projects/Sueca/src
-abs_top_builddir = /home/nok/Projects/Sueca
-abs_top_srcdir = /home/nok/Projects/Sueca
+abs_builddir = /home/nok/Projects/sueca/src
+abs_srcdir = /home/nok/Projects/sueca/src
+abs_top_builddir = /home/nok/Projects/sueca
+abs_top_srcdir = /home/nok/Projects/sueca
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 ac_ct_F77 = g77
@@ -212,7 +212,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = $(SHELL) /home/nok/Projects/Sueca/install-sh
+install_sh = $(SHELL) /home/nok/Projects/sueca/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -248,7 +248,9 @@ sueca_SOURCES = \
 	cards.c \
 	cards.h \
 	player.c \
-	player.h
+	player.h \
+	hand.c \
+	hand.h
 
 sueca_LDFLAGS = \
 	-Wl,--export-dynamic
@@ -329,6 +331,7 @@ include ./$(DEPDIR)/main.Po
 include ./$(DEPDIR)/deck.Po
 include ./$(DEPDIR)/cards.Po
 include ./$(DEPDIR)/player.Po
+include ./$(DEPDIR)/hand.Po
 
 .c.o:
 	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

@@ -30,7 +30,8 @@
 
 typedef struct _SuecaBaralho SuecaBaralho;
 
-SuecaBaralho *sueca_deck_new();
+SuecaBaralho *sueca_deck_new(void);
+void sueca_deck_delete(SuecaBaralho *);
 void sueca_deck_shuffle(SuecaBaralho *);
 void sueca_deck_cut(SuecaBaralho *);
 SuecaCarta *sueca_deck_pop(SuecaBaralho *);
