@@ -364,7 +364,7 @@ main.o main.o: main.c /usr/include/sys/types.h /usr/include/features.h \
   /usr/include/gtk-2.0/gtk/gtkvruler.h \
   /usr/include/gtk-2.0/gtk/gtkvscale.h \
   /usr/include/gtk-2.0/gtk/gtkvseparator.h cards.h deck.h hand.h player.h \
-  table.h /usr/include/libintl.h /usr/include/locale.h \
+  table.h team.h /usr/include/libintl.h /usr/include/locale.h \
   /usr/include/bits/locale.h
 
 /usr/include/sys/types.h:
@@ -1216,6 +1216,8 @@ hand.h:
 player.h:
 
 table.h:
+
+team.h:
 
 /usr/include/libintl.h:
 

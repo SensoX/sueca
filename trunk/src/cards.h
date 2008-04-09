@@ -30,7 +30,7 @@ typedef enum
 	ESPADAS = 0,	/* spades */
 	COPAS = 10,		/* hearts */
 	PAUS = 20,		/* clubs */
-	OUROS = 30,		/* diamonds */
+	OUROS = 30		/* diamonds */
 } SuecaCardsNaipe;	/* suit */
 
 typedef enum

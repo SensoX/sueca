@@ -18,24 +18,25 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
  
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#ifndef _TEAM_H_
+#define _TEAM_H_
 
-#define SUECA_PLAYER_NAME_SIZE 21
+#define SUECA_TEAM_NAME_SIZE 11
+#define SUECA_TEAM_NUMBER_OF_PLAYERS 2
 
 #include <glib.h>
 
-#include <hand.h>
+#include <player.h>
 
-typedef struct _SuecaPlayer SuecaPlayer;
+typedef struct _SuecaTeam SuecaTeam;
 
-SuecaPlayer *sueca_player_new(const gchar *);
-void sueca_player_delete(SuecaPlayer *);
-void sueca_player_set_name(SuecaPlayer *, const gchar *);
-gchar *sueca_player_get_name(const SuecaPlayer *);
+SuecaTeam *sueca_team_new(const gchar *);
+void sueca_team_delete(SuecaTeam *);
+void sueca_team_set_name(SuecaTeam *, const gchar *);
+gchar *sueca_team_get_name(const SuecaTeam *);
+void sueca_team_add_player(SuecaTeam *, const SuecaPlayer *);
 
-void sueca_player_printf(const SuecaPlayer *);
+void sueca_team_printf(const SuecaTeam *);
 
-#endif /* _PLAYER_H_ */
-
+#endif /* _TEAM_H_ */
  

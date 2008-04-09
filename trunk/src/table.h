@@ -21,7 +21,15 @@
 #ifndef _TABLE_H_
 #define _TABLE_H_
 
+#define SUECA_NUMBER_OF_TEAMS 2
+#define SUECA_NUMBER_OF_PLAYERS SUECA_NUMBER_OF_TEAMS * SUECA_TEAM_SIZE
+
 #include <glib.h>
+
+#include <deck.h>
+#include <team.h>
+
+typedef struct _SuecaTable SuecaTable;
 
 
 

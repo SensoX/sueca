@@ -21,3 +21,25 @@
 #include <table.h>
 
 #include <stdio.h>
+
+struct _SuecaTable
+{
+	SuecaBaralho *baralho;
+	SuecaPlayer *team; // 2 equipas
+	SuecaCarta *cartas; // 4 cartas
+};
+
+SuecaTable *
+sueca_table_new()
+{
+	//gint k;
+	SuecaTable *table = g_new0 (SuecaTable, 1);
+	
+	table->baralho = sueca_deck_new ();
+/* 	table->player =g_new0 (SuecaPlayer, SUECA_NUMBER_OF_PLAYERES);
+ * 	for(k = 0; k < SUECA_NUMBER_OF_PLAYERES; k++)
+ * 		table->player[k] = sueca_player_new ();
+ */
+	
+	return table;
+}

@@ -24,7 +24,9 @@ sueca_SOURCES = \
 	player.h \
 	hand.c \
 	hand.h \
-	table.c
+	table.c \
+	table.h \
+	team.c
 
 sueca_LDFLAGS = \
 	-Wl,--export-dynamic
