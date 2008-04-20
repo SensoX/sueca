@@ -22,15 +22,30 @@
 #define _TABLE_H_
 
 #define SUECA_NUMBER_OF_TEAMS 2
-#define SUECA_NUMBER_OF_PLAYERS SUECA_NUMBER_OF_TEAMS * SUECA_TEAM_SIZE
+#define SUECA_TABLE_NUMBER_OF_PLAYERS 4
+#define SUECA_VAZA_SIZE 4
 
 #include <glib.h>
+#include <glib/gprintf.h>
 
+#include <cards.h>
 #include <deck.h>
+#include <player.h>
 #include <team.h>
 
-typedef struct _SuecaTable SuecaTable;
+typedef struct _SuecaMesa SuecaMesa;
+typedef struct _SuecaMesaInit SuecaMesaInit;
+
+struct _SuecaMesaInit
+{
+	const gchar *player_name[SUECA_TABLE_NUMBER_OF_PLAYERS];
+	const gchar *team_name[SUECA_NUMBER_OF_TEAMS];
+};
+
+SuecaMesa *sueca_table_new(const SuecaMesaInit *);
+void sueca_table_delete(SuecaMesa *);
 
 
+void sueca_table_print(SuecaMesa *);
 
 #endif /* _TABLE_H_ */

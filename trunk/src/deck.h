@@ -22,9 +22,10 @@
 #define _DECK_H_
 
 #define SUECA_DECK_SIZE 40
-#define SUECA_SUIT_SIZE 40/4
+#define SUECA_SUIT_SIZE 10
 
 #include <glib.h>
+#include <glib/gprintf.h>
 
 #include <cards.h>
 
@@ -36,6 +37,6 @@ void sueca_deck_shuffle(SuecaBaralho *);
 void sueca_deck_cut(SuecaBaralho *);
 SuecaCarta *sueca_deck_pop(SuecaBaralho *);
 
-void sueca_deck_printf(const SuecaBaralho *);
+void sueca_deck_print(const SuecaBaralho *);
 
 #endif /* _DECK_H_ */

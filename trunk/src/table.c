@@ -20,26 +20,78 @@
 
 #include <table.h>
 
-#include <stdio.h>
-
-struct _SuecaTable
+struct _SuecaMesa
 {
 	SuecaBaralho *baralho;
-	SuecaPlayer *team; // 2 equipas
-	SuecaCarta *cartas; // 4 cartas
+	GList *equipas; // 2 equipas
+	GList *jogadores; // 4 jogadores
+	GList *vaza; // 4 cartas
 };
 
-SuecaTable *
-sueca_table_new()
+void sueca_table_delete_equipas(gpointer data, gpointer user_data);
+void sueca_table_delete_vaza(gpointer data, gpointer user_data);
+
+
+SuecaMesa *
+sueca_table_new(const SuecaMesaInit *init)
 {
-	//gint k;
-	SuecaTable *table = g_new0 (SuecaTable, 1);
+	gint k;
+	SuecaMesa *mesa = g_new0 (SuecaMesa, 1);
 	
-	table->baralho = sueca_deck_new ();
-/* 	table->player =g_new0 (SuecaPlayer, SUECA_NUMBER_OF_PLAYERES);
- * 	for(k = 0; k < SUECA_NUMBER_OF_PLAYERES; k++)
- * 		table->player[k] = sueca_player_new ();
- */
+	mesa->baralho = sueca_deck_new ();
 	
-	return table;
+	for (k = 0; k < SUECA_TABLE_NUMBER_OF_PLAYERS; k++)
+		mesa->jogadores = g_list_append(mesa->jogadores,
+									  sueca_player_new (init->player_name[k]));
+	for (k = 0; k < SUECA_NUMBER_OF_TEAMS; k++)
+		mesa->equipas = g_list_append(mesa->equipas,
+									sueca_team_new (init->team_name[k],
+													g_list_nth_data(mesa->jogadores,
+																	k),
+													g_list_nth_data(mesa->jogadores,
+																	k+2)));
+	mesa->vaza = NULL;
+	
+	return mesa;
+}
+
+void
+sueca_table_delete(SuecaMesa *mesa)
+{
+	sueca_deck_delete (mesa->baralho);
+	g_list_foreach(mesa->equipas, sueca_table_delete_equipas, NULL);
+	g_list_foreach(mesa->vaza, sueca_table_delete_vaza, NULL);
+	g_free(mesa);
+}
+
+void
+sueca_table_delete_equipas(gpointer data, gpointer user_data)
+{
+	sueca_team_delete ((SuecaEquipa*) data);
+}
+
+void
+sueca_table_delete_vaza(gpointer data, gpointer user_data)
+{
+	sueca_cards_delete ((SuecaCarta*) data);
+}
+
+void
+sueca_table_print(SuecaMesa *mesa)
+{
+	gint k;
+	
+	g_printf("MESA\n");
+	g_printf("BARALHO\n");
+	sueca_deck_print (mesa->baralho);
+	g_printf("EQUIPAS\n");
+	for(k = 0; k < SUECA_NUMBER_OF_TEAMS; k++)
+		sueca_team_print (g_list_nth_data(mesa->equipas, k));
+	g_printf("JOGADORES\n");
+	for(k = 0; k < SUECA_TABLE_NUMBER_OF_PLAYERS; k++)
+		sueca_player_print (g_list_nth_data(mesa->jogadores, k));
+	g_printf("\nVAZA\n");
+	for(k = 0; k < SUECA_VAZA_SIZE; k++)
+		sueca_cards_print (g_list_nth_data(mesa->vaza, k));
+	g_printf("\n");
 }

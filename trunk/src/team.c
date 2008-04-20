@@ -20,41 +20,59 @@
 
 #include <team.h>
 
-#include <stdio.h>
-#include <string.h>
-
-struct _SuecaTeam
+struct _SuecaEquipa
 {
 	gchar *name;
 	GList *jogadores;
 };
 
-SuecaTeam *
-sueca_team_new(const gchar *name)
+void sueca_team_delete_jogadores(gpointer data, gpointer user_data);
+void sueca_team_add_player(SuecaEquipa *, const SuecaJogador *);
+
+SuecaEquipa *
+sueca_team_new(const gchar *name, SuecaJogador *player_1, SuecaJogador *player_2)
 {
-	SuecaTeam *team = g_new0(SuecaTeam, 1);
+	SuecaEquipa *team;
+	
+	if(name == NULL || player_1 == NULL || player_2 == NULL)
+		return NULL;
+	
+	team = g_new0(SuecaEquipa, 1);
 	
 	team->name = g_new0(gchar, SUECA_TEAM_NAME_SIZE);
 	sueca_team_set_name(team, name);
+	
+	sueca_team_add_player(team, player_1);
+	sueca_team_add_player(team, player_2);
 	
 	return team;
 }
 
 void
-sueca_team_delete_players(gpointer data, gpointer user_data)
+sueca_team_add_player(SuecaEquipa *equipa, const SuecaJogador *jogador)
 {
-	sueca_player_delete ((SuecaPlayer*) data);
+	if(equipa == NULL)
+		return;
+	
+	if(g_list_length (equipa->jogadores) < SUECA_TEAM_NUMBER_OF_PLAYERS)
+		equipa->jogadores = g_list_append (equipa->jogadores, (gpointer)jogador);
 }
 
 void
-sueca_team_delete(SuecaTeam *equipa)
+sueca_team_delete(SuecaEquipa *equipa)
 {
-	g_list_foreach(equipa->jogadores, sueca_team_delete_players, NULL);
+	g_list_foreach(equipa->jogadores, sueca_team_delete_jogadores, NULL);
 	g_free(equipa);
 }
 
 void
-sueca_team_set_name(SuecaTeam *equipa, const gchar *name)
+sueca_team_delete_jogadores(gpointer data, gpointer user_data)
+{
+	sueca_player_delete ((SuecaJogador*) data);
+}
+
+void
+sueca_team_set_name(SuecaEquipa *equipa, const gchar *name)
 {
 	if(equipa == NULL || name == NULL)
 		return;
@@ -63,7 +81,7 @@ sueca_team_set_name(SuecaTeam *equipa, const gchar *name)
 }
 
 gchar *
-sueca_team_get_name(const SuecaTeam *equipa)
+sueca_team_get_name(const SuecaEquipa *equipa)
 {
 	gchar *name = g_new0(gchar, SUECA_PLAYER_NAME_SIZE);
 		
@@ -76,26 +94,15 @@ sueca_team_get_name(const SuecaTeam *equipa)
 }
 
 void
-sueca_team_add_player(SuecaTeam *equipa, const SuecaPlayer *jogador)
+sueca_team_print(const SuecaEquipa *equipa)
 {
-	if(equipa == NULL)
-		return;
-	
-	if(g_list_length (equipa->jogadores) < SUECA_TEAM_NUMBER_OF_PLAYERS)
-		equipa->jogadores = g_list_append (equipa->jogadores, (gpointer)jogador);
-}
-
-void
-sueca_team_printf(const SuecaTeam *equipa)
-{
-	gint size, k;
+	GList *iter;
 	
 	if(equipa == NULL)
 		return;
 	
-	size = g_list_length (equipa->jogadores);
-	
-	for(k = 0; k < size; k++)
-		sueca_player_printf (g_list_nth_data (equipa->jogadores, k));
-	printf("\n");
+	g_printf("%s\n", equipa->name);
+	for(iter = equipa->jogadores; iter != NULL; iter = g_list_next(iter))
+		sueca_player_print(g_list_nth_data (iter, 0));
+	g_printf("\n");
 }

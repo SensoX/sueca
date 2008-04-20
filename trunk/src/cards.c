@@ -20,8 +20,6 @@
 
 #include <cards.h>
 
-#include <stdio.h>
-
 struct _SuecaCarta
 {
 	SuecaCardsNaipe naipe;
@@ -76,10 +74,10 @@ sueca_cards_get_type_value(const SuecaCardsTipo t)
 }
 
 void
-sueca_cards_printf(const SuecaCarta *carta)
+sueca_cards_print(const SuecaCarta *carta)
 {
 	if(carta == NULL)
 		return;
 	
-	printf("%d\n", sueca_cards_get_naipe(carta) + sueca_cards_get_tipo(carta));
+	g_printf("%d\n", sueca_cards_get_naipe(carta) + sueca_cards_get_tipo(carta));
 }

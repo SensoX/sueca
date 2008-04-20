@@ -22,6 +22,7 @@
 #define _CARDS_H_
 
 #include <glib.h>
+#include <glib/gprintf.h>
 
 typedef struct _SuecaCarta SuecaCarta;
 
@@ -54,6 +55,6 @@ SuecaCardsTipo sueca_cards_get_tipo(const SuecaCarta *);
 gint sueca_cards_get_type_value(const SuecaCardsTipo);
 
 
-void sueca_cards_printf(const SuecaCarta *);
+void sueca_cards_print(const SuecaCarta *);
 
 #endif /* _CARDS_H_ */

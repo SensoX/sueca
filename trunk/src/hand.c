@@ -20,12 +20,13 @@
 
 #include <hand.h>
 
-#include <stdio.h>
-
 struct _SuecaMao
 {
 	GList *cartas;
 };
+
+void sueca_hand_delete_cards(gpointer data, gpointer user_data);
+gint sueca_hand_sort_cards(gconstpointer a, gconstpointer b);
 
 SuecaMao *
 sueca_hand_new()
@@ -36,16 +37,22 @@ sueca_hand_new()
 }
 
 void
+sueca_hand_delete(SuecaMao *mao)
+{
+	g_list_foreach(mao->cartas, sueca_hand_delete_cards, NULL);
+	g_free(mao);
+}
+
+void
 sueca_hand_delete_cards(gpointer data, gpointer user_data)
 {
 	sueca_cards_delete ((SuecaCarta*) data);
 }
 
 void
-sueca_hand_delete(SuecaMao *mao)
+sueca_hand_sort(SuecaMao *mao)
 {
-	g_list_foreach(mao->cartas, sueca_hand_delete_cards, NULL);
-	g_free(mao);
+	mao->cartas = g_list_sort (mao->cartas, sueca_hand_sort_cards);
 }
 
 gint
@@ -63,12 +70,6 @@ sueca_hand_sort_cards(gconstpointer a, gconstpointer b)
 	if(sueca_cards_get_tipo(a) > sueca_cards_get_tipo(b))
 		return 1;
 	return 0;
-}
-
-void
-sueca_hand_sort(SuecaMao *mao)
-{
-	mao->cartas = g_list_sort (mao->cartas, sueca_hand_sort_cards);
 }
 
 void
@@ -100,16 +101,14 @@ sueca_hand_remove(SuecaMao *mao, const gint pos)
 }
 
 void
-sueca_hand_printf(const SuecaMao *mao)
+sueca_hand_print(const SuecaMao *mao)
 {
-	gint size, k;
+	GList * iter;
 	
 	if(mao == NULL)
 		return;
 	
-	size = g_list_length (mao->cartas);
-	
-	for(k = 0; k < size; k++)
-		sueca_cards_printf (g_list_nth_data (mao->cartas, k));
-	printf("\n");
+	for(iter = mao->cartas; iter != NULL; iter = g_list_next(iter))
+		sueca_cards_print(g_list_nth_data (iter, 0));
+	g_printf("\n");
 }

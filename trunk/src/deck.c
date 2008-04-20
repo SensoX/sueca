@@ -20,14 +20,12 @@
 
 #include <deck.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-
 struct _SuecaBaralho
 {
 	GList *cartas;
 };
 
+void sueca_deck_delete_cards(gpointer, gpointer);
 void sueca_deck_push(SuecaBaralho *baralho, const SuecaCarta *carta);
 
 SuecaBaralho *
@@ -53,16 +51,16 @@ sueca_deck_new()
 }
 
 void
-sueca_deck_delete_cards(gpointer data, gpointer user_data)
-{
-	sueca_cards_delete ((SuecaCarta*) data);
-}
-
-void
 sueca_deck_delete(SuecaBaralho *baralho)
 {
 	g_list_foreach(baralho->cartas, sueca_deck_delete_cards, NULL);
 	g_free(baralho);
+}
+
+void
+sueca_deck_delete_cards(gpointer data, gpointer user_data)
+{
+	sueca_cards_delete ((SuecaCarta*) data);
 }
 
 void
@@ -169,16 +167,14 @@ sueca_deck_pop(SuecaBaralho *baralho)
 }
 
 void
-sueca_deck_printf(const SuecaBaralho *baralho)
+sueca_deck_print(const SuecaBaralho *baralho)
 {
-	gint size, k;
+	GList *iter;
 	
 	if(baralho == NULL)
 		return;
 	
-	size = g_list_length (baralho->cartas);
-	
-	for(k = 0; k < size; k++)
-		sueca_cards_printf (g_list_nth_data (baralho->cartas, k));
-	printf("\n");
+	for(iter = baralho->cartas; iter != NULL; iter = g_list_next(iter))
+		sueca_cards_print(g_list_nth_data (iter, 0));
+	g_printf("\n");
 }

@@ -54,15 +54,11 @@ deck.o deck.o: deck.c deck.h /usr/include/glib-2.0/glib.h \
   /usr/include/glib-2.0/glib/gtestutils.h \
   /usr/include/glib-2.0/glib/gthreadpool.h \
   /usr/include/glib-2.0/glib/gtimer.h /usr/include/glib-2.0/glib/gtree.h \
-  /usr/include/glib-2.0/glib/gurifuncs.h cards.h /usr/include/stdio.h \
+  /usr/include/glib-2.0/glib/gurifuncs.h \
+  /usr/include/glib-2.0/glib/gprintf.h /usr/include/stdio.h \
   /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
   /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
-  /usr/include/bits/stdio.h /usr/include/stdlib.h \
-  /usr/include/sys/types.h /usr/include/endian.h \
-  /usr/include/bits/endian.h /usr/include/sys/select.h \
-  /usr/include/bits/select.h /usr/include/bits/sigset.h \
-  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
-  /usr/include/alloca.h
+  /usr/include/bits/stdio.h cards.h
 
 deck.h:
 
@@ -216,7 +212,7 @@ deck.h:
 
 /usr/include/glib-2.0/glib/gurifuncs.h:
 
-cards.h:
+/usr/include/glib-2.0/glib/gprintf.h:
 
 /usr/include/stdio.h:
 
@@ -232,22 +228,4 @@ cards.h:
 
 /usr/include/bits/stdio.h:
 
-/usr/include/stdlib.h:
-
-/usr/include/sys/types.h:
-
-/usr/include/endian.h:
-
-/usr/include/bits/endian.h:
-
-/usr/include/sys/select.h:
-
-/usr/include/bits/select.h:
-
-/usr/include/bits/sigset.h:
-
-/usr/include/sys/sysmacros.h:
-
-/usr/include/bits/pthreadtypes.h:
-
-/usr/include/alloca.h:
+cards.h:

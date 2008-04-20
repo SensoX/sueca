@@ -54,13 +54,11 @@ player.o player.o: player.c player.h /usr/include/glib-2.0/glib.h \
   /usr/include/glib-2.0/glib/gtestutils.h \
   /usr/include/glib-2.0/glib/gthreadpool.h \
   /usr/include/glib-2.0/glib/gtimer.h /usr/include/glib-2.0/glib/gtree.h \
-  /usr/include/glib-2.0/glib/gurifuncs.h hand.h cards.h \
-  /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
-  /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
-  /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
-  /usr/include/string.h /usr/include/bits/string.h \
-  /usr/include/bits/string2.h /usr/include/endian.h \
-  /usr/include/bits/endian.h /usr/include/stdlib.h
+  /usr/include/glib-2.0/glib/gurifuncs.h \
+  /usr/include/glib-2.0/glib/gprintf.h /usr/include/stdio.h \
+  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h hand.h cards.h
 
 player.h:
 
@@ -214,9 +212,7 @@ player.h:
 
 /usr/include/glib-2.0/glib/gurifuncs.h:
 
-hand.h:
-
-cards.h:
+/usr/include/glib-2.0/glib/gprintf.h:
 
 /usr/include/stdio.h:
 
@@ -232,14 +228,6 @@ cards.h:
 
 /usr/include/bits/stdio.h:
 
-/usr/include/string.h:
+hand.h:
 
-/usr/include/bits/string.h:
-
-/usr/include/bits/string2.h:
-
-/usr/include/endian.h:
-
-/usr/include/bits/endian.h:
-
-/usr/include/stdlib.h:
+cards.h:

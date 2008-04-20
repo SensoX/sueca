@@ -20,28 +20,32 @@
 
 #include <player.h>
 
-#include <stdio.h>
-#include <string.h>
-
-struct _SuecaPlayer
+struct _SuecaJogador
 {
 	gchar *name;
 	SuecaMao *mao;
 };
 
-SuecaPlayer *
+SuecaJogador *
 sueca_player_new(const gchar *name)
 {
-	SuecaPlayer *player = g_new0(SuecaPlayer, 1);
+	SuecaJogador *player;
+		
+	if(name == NULL)
+		return NULL;
+	
+	player = g_new0(SuecaJogador, 1);
 	
 	player->name = g_new0(gchar, SUECA_PLAYER_NAME_SIZE);
 	sueca_player_set_name(player, name);
+	
+	player->mao = sueca_hand_new();
 	
 	return player;
 }
 
 void
-sueca_player_delete(SuecaPlayer *player)
+sueca_player_delete(SuecaJogador *player)
 {
 	sueca_hand_delete(player->mao);
 	g_free(player->name);
@@ -49,7 +53,7 @@ sueca_player_delete(SuecaPlayer *player)
 }
 
 void
-sueca_player_set_name(SuecaPlayer *player, const gchar *name)
+sueca_player_set_name(SuecaJogador *player, const gchar *name)
 {
 	if(player == NULL || name == NULL)
 		return;
@@ -58,7 +62,7 @@ sueca_player_set_name(SuecaPlayer *player, const gchar *name)
 }
 
 gchar *
-sueca_player_get_name(const SuecaPlayer *player)
+sueca_player_get_name(const SuecaJogador *player)
 {
 	gchar *name = g_new0(gchar, SUECA_PLAYER_NAME_SIZE);
 		
@@ -71,10 +75,10 @@ sueca_player_get_name(const SuecaPlayer *player)
 }
 
 void
-sueca_player_printf(const SuecaPlayer *player)
+sueca_player_print(const SuecaJogador *player)
 {
 	if(player == NULL)
 		return;
-	sueca_player_get_name(player);
-	printf("name:%s\n", sueca_player_get_name(player));
+	
+	g_printf("name:%s\n", sueca_player_get_name(player));
 }

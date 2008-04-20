@@ -24,17 +24,18 @@
 #define SUECA_PLAYER_NAME_SIZE 21
 
 #include <glib.h>
+#include <glib/gprintf.h>
 
 #include <hand.h>
 
-typedef struct _SuecaPlayer SuecaPlayer;
+typedef struct _SuecaJogador SuecaJogador;
 
-SuecaPlayer *sueca_player_new(const gchar *);
-void sueca_player_delete(SuecaPlayer *);
-void sueca_player_set_name(SuecaPlayer *, const gchar *);
-gchar *sueca_player_get_name(const SuecaPlayer *);
+SuecaJogador *sueca_player_new(const gchar *);
+void sueca_player_delete(SuecaJogador *);
+void sueca_player_set_name(SuecaJogador *, const gchar *);
+gchar *sueca_player_get_name(const SuecaJogador *);
 
-void sueca_player_printf(const SuecaPlayer *);
+void sueca_player_print(const SuecaJogador *);
 
 #endif /* _PLAYER_H_ */
 

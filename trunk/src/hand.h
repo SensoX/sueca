@@ -24,17 +24,18 @@
 #define SUECA_HAND_SIZE 10
 
 #include <glib.h>
+#include <glib/gprintf.h>
 
 #include <cards.h>
 
 typedef struct _SuecaMao SuecaMao;
 
-SuecaMao *sueca_hand_new();
+SuecaMao *sueca_hand_new(void);
 void sueca_hand_delete(SuecaMao *);
 void sueca_hand_sort(SuecaMao *);
 void sueca_hand_insert(SuecaMao *, const SuecaCarta *, const gint);
 SuecaCarta *sueca_hand_remove(SuecaMao *, const gint);
-void sueca_hand_printf(const SuecaMao *);
+void sueca_hand_print(const SuecaMao *);
 
 
 #endif /* _HAND_H_ */

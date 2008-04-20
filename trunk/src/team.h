@@ -25,18 +25,18 @@
 #define SUECA_TEAM_NUMBER_OF_PLAYERS 2
 
 #include <glib.h>
+#include <glib/gprintf.h>
 
 #include <player.h>
 
-typedef struct _SuecaTeam SuecaTeam;
+typedef struct _SuecaEquipa SuecaEquipa;
 
-SuecaTeam *sueca_team_new(const gchar *);
-void sueca_team_delete(SuecaTeam *);
-void sueca_team_set_name(SuecaTeam *, const gchar *);
-gchar *sueca_team_get_name(const SuecaTeam *);
-void sueca_team_add_player(SuecaTeam *, const SuecaPlayer *);
+SuecaEquipa *sueca_team_new(const gchar *, SuecaJogador *, SuecaJogador *);
+void sueca_team_delete(SuecaEquipa *);
+void sueca_team_set_name(SuecaEquipa *, const gchar *);
+gchar *sueca_team_get_name(const SuecaEquipa *);
 
-void sueca_team_printf(const SuecaTeam *);
+void sueca_team_print(const SuecaEquipa *);
 
 #endif /* _TEAM_H_ */
  

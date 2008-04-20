@@ -18,15 +18,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
+//#include <sys/types.h>
+//#include <sys/stat.h>
+//#include <unistd.h>
+//#include <string.h>
 
-#include <config.h>
+//#include <config.h>
 
 #include <gtk/gtk.h>
+#include <glib/gprintf.h>
 
 #include <cards.h>
 #include <deck.h>
@@ -63,10 +63,8 @@
 int
 main(int argc, char *argv[])
 {
-	SuecaBaralho *baralho;
-/* 	SuecaPlayer *player;  */
-	//SuecaCarta *carta;
-	//int i;
+	SuecaMesaInit *tinit = g_new0(SuecaMesaInit, 1);
+	SuecaMesa *mesa;
 	
  	#ifdef ENABLE_NLS
 		bindtextdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
@@ -77,21 +75,18 @@ main(int argc, char *argv[])
 	gtk_set_locale();
 	gtk_init(&argc, &argv);
 	
-	printf("SUECA\n");
-	baralho = sueca_deck_new ();
-	sueca_deck_printf (baralho);
-/* 	printf("SUECA\n");
- * 	sueca_deck_push (baralho, sueca_deck_pop (baralho));
- * 	sueca_deck_printf (baralho);
- */
-/* 	player = sueca_player_new("marco");
- * 	sueca_player_printf(player);
- * 	sueca_player_delete(player);
- * 	player = sueca_player_new("andré");
- * 	sueca_player_printf(player);
- * 	sueca_player_delete(player);
- */
-	sueca_deck_delete (baralho);
+	g_printf("SUECA\n");
+	tinit->player_name[0] = "MARCO";
+	tinit->player_name[1] = "RUI";
+	tinit->player_name[2] = "ANDRE";
+	tinit->player_name[3] = "JOEL";
+	tinit->team_name[0] = "A";
+	tinit->team_name[1] = "B";
+	
+	mesa = sueca_table_new (tinit);
+	
+	sueca_table_print (mesa);
+	sueca_table_delete (mesa);
 	
 	//gtk_main();
 	return 0;
