@@ -21,7 +21,7 @@
 #ifndef _HAND_H_
 #define _HAND_H_
 
-#define SUECA_HAND_SIZE 10
+#define SUECA_HAND_MAX_SIZE 10
 
 #include <glib.h>
 #include <glib/gprintf.h>
@@ -35,7 +35,7 @@ void sueca_hand_delete(SuecaMao *);
 void sueca_hand_sort(SuecaMao *);
 void sueca_hand_insert(SuecaMao *, const SuecaCarta *, const gint);
 SuecaCarta *sueca_hand_remove(SuecaMao *, const gint);
-void sueca_hand_print(const SuecaMao *);
 
+void sueca_hand_print(const SuecaMao *);
 
 #endif /* _HAND_H_ */

@@ -63,8 +63,7 @@
 int
 main(int argc, char *argv[])
 {
-	SuecaMesaInit *tinit = g_new0(SuecaMesaInit, 1);
-	SuecaMesa *mesa;
+	int i;
 	
  	#ifdef ENABLE_NLS
 		bindtextdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
@@ -75,18 +74,42 @@ main(int argc, char *argv[])
 	gtk_set_locale();
 	gtk_init(&argc, &argv);
 	
-	g_printf("SUECA\n");
-	tinit->player_name[0] = "MARCO";
-	tinit->player_name[1] = "RUI";
-	tinit->player_name[2] = "ANDRE";
-	tinit->player_name[3] = "JOEL";
-	tinit->team_name[0] = "A";
-	tinit->team_name[1] = "B";
 	
-	mesa = sueca_table_new (tinit);
+/* 	// carta
+ * 	SuecaCarta *sc = sueca_cards_new (PAUS, BISCA);
+ * 	g_printf("NAIPE: %d\n", sueca_cards_get_naipe (sc));
+ * 	g_printf("TIPO: %d\n", sueca_cards_get_tipo (sc));
+ * 	g_printf("VALOR: %d\n", sueca_cards_get_value (sc));
+ * 	g_printf("NOME CARTA: %s\n", sueca_cards_get_name (sc)->str);
+ * 	g_printf("PONTUAÇÃO: %d\n", sueca_cards_get_pontuation (sc));
+ * 	sueca_cards_print (sc);
+ * 	sueca_cards_delete (sc);
+ */
+/* 	// deck
+ * 	SuecaBaralho *sb = sueca_deck_new ();
+ * 	sueca_deck_shuffle (sb);
+ * 	//sueca_deck_cut (sb);
+ * 	sueca_deck_print (sb);
+ * 	SuecaCarta *sbc = sueca_deck_pop (sb);
+ * 	printf("\n");
+ * 	sueca_cards_print (sbc);
+ * 	printf("\n");
+ * 	sueca_deck_print (sb);
+ * 	sueca_deck_delete (sb);
+ */
+/* 	// hand
+ * 	SuecaMao *sm = sueca_hand_new ();
+ * 	SuecaBaralho *smb = sueca_deck_new ();
+ * 	sueca_deck_shuffle (smb);
+ * 	for(i = 0; i < 10; i++)
+ * 		sueca_hand_insert (sm, sueca_deck_pop (smb), 0);
+ * 	sueca_hand_print (sm);
+ * 	printf("\n");
+ * 	sueca_hand_sort (sm);
+ * 	sueca_hand_print (sm);
+ */
 	
-	sueca_table_print (mesa);
-	sueca_table_delete (mesa);
+
 	
 	//gtk_main();
 	return 0;

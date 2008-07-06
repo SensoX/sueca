@@ -26,7 +26,7 @@ struct _SuecaBaralho
 };
 
 void sueca_deck_delete_cards(gpointer, gpointer);
-void sueca_deck_push(SuecaBaralho *baralho, const SuecaCarta *carta);
+void sueca_deck_push(SuecaBaralho *, const SuecaCarta *);
 
 SuecaBaralho *
 sueca_deck_new()
@@ -53,6 +53,8 @@ sueca_deck_new()
 void
 sueca_deck_delete(SuecaBaralho *baralho)
 {
+	if(baralho == NULL)
+		return;
 	g_list_foreach(baralho->cartas, sueca_deck_delete_cards, NULL);
 	g_free(baralho);
 }
@@ -66,19 +68,19 @@ sueca_deck_delete_cards(gpointer data, gpointer user_data)
 void
 sueca_deck_shuffle(SuecaBaralho *baralho)
 {
+	if(baralho == NULL)
+		return;
+	
 	gint size, k;
 	gpointer temp;
 	GList *gltemp;
-	
-	if(baralho == NULL)
-		return;
 	
 	size = g_list_length (baralho->cartas);
 	g_random_set_seed(time(NULL));
 	
 	for(k = 0; k < size; k++)
 	{
-		gint32 r = g_random_int_range(0, SUECA_DECK_SIZE);
+		gint32 r = g_random_int_range(0, SUECA_DECK_MAX_SIZE);
 		
 		temp = g_list_nth_data (baralho->cartas, k);
 		
@@ -95,15 +97,15 @@ sueca_deck_shuffle(SuecaBaralho *baralho)
 void
 sueca_deck_cut(SuecaBaralho *baralho)
 {
+	if(baralho == NULL)
+		return;
+	
 	SuecaBaralho *b1, *b2;
 	gint32 r;
 	gint k;
 	
-	if(baralho == NULL)
-		return;
-	
 	g_random_set_seed(time(NULL));
-	r = g_random_int_range(1, SUECA_DECK_SIZE - 1);
+	r = g_random_int_range(1, SUECA_DECK_MAX_SIZE - 1);
 	
 	b1 = g_new0(SuecaBaralho, 1);
 	b2 = g_new0(SuecaBaralho, 1);
@@ -112,7 +114,7 @@ sueca_deck_cut(SuecaBaralho *baralho)
 	{
 		sueca_deck_push(b1, sueca_deck_pop(baralho));
 	}
-	for(k = r; k < SUECA_DECK_SIZE; k++)
+	for(k = r; k < SUECA_DECK_MAX_SIZE; k++)
 	{
 		sueca_deck_push(b2, sueca_deck_pop(baralho));
 	}
@@ -121,7 +123,7 @@ sueca_deck_cut(SuecaBaralho *baralho)
 	{
 		sueca_deck_push(baralho, sueca_deck_pop(b1));
 	}
-	for(k = r; k < SUECA_DECK_SIZE; k++)
+	for(k = r; k < SUECA_DECK_MAX_SIZE; k++)
 	{
 		sueca_deck_push(baralho, sueca_deck_pop(b2));
 	}
@@ -133,26 +135,26 @@ sueca_deck_cut(SuecaBaralho *baralho)
 void
 sueca_deck_push(SuecaBaralho *baralho, const SuecaCarta *carta)
 {
-	gint size;
-	
 	if(baralho == NULL || carta == NULL)
 		return;
 	
+	gint size;
+	
 	size = g_list_length (baralho->cartas);
 	
-	if(size < SUECA_DECK_SIZE)
+	if(size < SUECA_DECK_MAX_SIZE)
 		baralho->cartas = g_list_append (baralho->cartas, (gpointer)carta);
 }
 
 SuecaCarta *
 sueca_deck_pop(SuecaBaralho *baralho)
 {
+	if(baralho == NULL)
+		return NULL;
+	
 	SuecaCarta *carta;
 	GList *gltemp;
 	gint size;
-	
-	if(baralho == NULL)
-		return NULL;
 	
 	size = g_list_length (baralho->cartas);
 
@@ -169,12 +171,16 @@ sueca_deck_pop(SuecaBaralho *baralho)
 void
 sueca_deck_print(const SuecaBaralho *baralho)
 {
-	GList *iter;
-	
 	if(baralho == NULL)
 		return;
 	
+	GList *iter;
+	
+	g_printf("[");
 	for(iter = baralho->cartas; iter != NULL; iter = g_list_next(iter))
+	{
 		sueca_cards_print(g_list_nth_data (iter, 0));
-	g_printf("\n");
+		g_printf(" ");
+	}
+	g_printf("]");
 }

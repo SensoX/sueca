@@ -37,7 +37,7 @@ typedef enum
 typedef enum
 {
 	DUQUE = 1,		/* Two */
-	TERMO,			/* Three */
+	TERNO,			/* Three */
 	QUADRA,			/* Four */
 	QUINA,			/* Five */
 	SENA,			/* Six */
@@ -52,8 +52,9 @@ SuecaCarta *sueca_cards_new(const SuecaCardsNaipe, const SuecaCardsTipo);
 void sueca_cards_delete(SuecaCarta *);
 SuecaCardsNaipe sueca_cards_get_naipe(const SuecaCarta *);
 SuecaCardsTipo sueca_cards_get_tipo(const SuecaCarta *);
-gint sueca_cards_get_type_value(const SuecaCardsTipo);
-
+gint sueca_cards_get_value(const SuecaCarta *);
+GString *sueca_cards_get_name(const SuecaCarta *);
+gint sueca_cards_get_pontuation(const SuecaCarta *);
 
 void sueca_cards_print(const SuecaCarta *);
 

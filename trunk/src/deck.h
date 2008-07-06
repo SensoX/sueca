@@ -21,7 +21,7 @@
 #ifndef _DECK_H_
 #define _DECK_H_
 
-#define SUECA_DECK_SIZE 40
+#define SUECA_DECK_MAX_SIZE 40
 #define SUECA_SUIT_SIZE 10
 
 #include <glib.h>

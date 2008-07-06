@@ -25,20 +25,22 @@ struct _SuecaMao
 	GList *cartas;
 };
 
-void sueca_hand_delete_cards(gpointer data, gpointer user_data);
-gint sueca_hand_sort_cards(gconstpointer a, gconstpointer b);
+void sueca_hand_delete_cards(gpointer, gpointer);
+gint sueca_hand_sort_cards(gconstpointer, gconstpointer);
 
 SuecaMao *
 sueca_hand_new()
 {
 	SuecaMao *mao = g_new0(SuecaMao, 1);
-	
+	mao->cartas = NULL;
 	return mao;
 }
 
 void
 sueca_hand_delete(SuecaMao *mao)
 {
+	if(mao == NULL)
+		return;
 	g_list_foreach(mao->cartas, sueca_hand_delete_cards, NULL);
 	g_free(mao);
 }
@@ -61,13 +63,9 @@ sueca_hand_sort_cards(gconstpointer a, gconstpointer b)
 	a = (SuecaCarta *)a;
 	b = (SuecaCarta *)b;
 	
-	if(sueca_cards_get_naipe(a) < sueca_cards_get_naipe(b))
+	if(sueca_cards_get_value (a) > sueca_cards_get_value (b))
 		return -1;
-	if(sueca_cards_get_naipe(a) > sueca_cards_get_naipe(b))
-		return 1;
-	if(sueca_cards_get_tipo(a) < sueca_cards_get_tipo(b))
-		return -1;
-	if(sueca_cards_get_tipo(a) > sueca_cards_get_tipo(b))
+	if(sueca_cards_get_value (a) < sueca_cards_get_value (b))
 		return 1;
 	return 0;
 }
@@ -75,23 +73,21 @@ sueca_hand_sort_cards(gconstpointer a, gconstpointer b)
 void
 sueca_hand_insert(SuecaMao *mao, const SuecaCarta *carta, const gint pos)
 {
-	if(mao == NULL || carta == NULL || pos < 0 || pos >= SUECA_HAND_SIZE)
+	if(mao == NULL || carta == NULL || pos < 0 || pos >= SUECA_HAND_MAX_SIZE)
 		return;
-	if(g_list_nth_data (mao->cartas, pos) == NULL)
-		return;
+	if(g_list_length(mao->cartas) == SUECA_HAND_MAX_SIZE)
+	   return;
 	
-	mao->cartas = g_list_delete_link (mao->cartas,
-										  g_list_nth (mao->cartas, pos));
 	mao->cartas = g_list_insert (mao->cartas, (gpointer)carta, pos);
 }
 
 SuecaCarta *
 sueca_hand_remove(SuecaMao *mao, const gint pos)
-{
-	SuecaCarta *carta;
-	
-	if(mao == NULL || pos < 0 || pos >= SUECA_HAND_SIZE)
+{	
+	if(mao == NULL || pos < 0 || pos >= SUECA_HAND_MAX_SIZE)
 		return NULL;
+	
+	SuecaCarta *carta;
 	
 	carta = g_list_nth_data (mao->cartas, pos);
 	mao->cartas = g_list_delete_link (mao->cartas,
@@ -103,12 +99,16 @@ sueca_hand_remove(SuecaMao *mao, const gint pos)
 void
 sueca_hand_print(const SuecaMao *mao)
 {
-	GList * iter;
-	
 	if(mao == NULL)
 		return;
 	
+	GList * iter;
+	
+	g_printf("[");
 	for(iter = mao->cartas; iter != NULL; iter = g_list_next(iter))
+	{
 		sueca_cards_print(g_list_nth_data (iter, 0));
-	g_printf("\n");
+		g_printf(" ");
+	}
+	g_printf("]");
 }

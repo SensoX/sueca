@@ -22,7 +22,6 @@
 #define _TEAM_H_
 
 #define SUECA_TEAM_NAME_SIZE 11
-#define SUECA_TEAM_NUMBER_OF_PLAYERS 2
 
 #include <glib.h>
 #include <glib/gprintf.h>
@@ -35,6 +34,11 @@ SuecaEquipa *sueca_team_new(const gchar *, SuecaJogador *, SuecaJogador *);
 void sueca_team_delete(SuecaEquipa *);
 void sueca_team_set_name(SuecaEquipa *, const gchar *);
 gchar *sueca_team_get_name(const SuecaEquipa *);
+void sueca_team_inc_vitorias(SuecaEquipa *);
+void sueca_team_reset_vitorias(SuecaEquipa *);
+int sueca_team_get_vitorias(const SuecaEquipa *);
+void sueca_team_add_vaza(SuecaEquipa *, GList *);
+GList *sueca_team_remove_vazas(SuecaEquipa *);
 
 void sueca_team_print(const SuecaEquipa *);
 

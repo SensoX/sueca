@@ -2,9 +2,35 @@
 <gtodo>
   <category title="Personal" place="0">
     <item>
-      <attribute id="1207695802" priority="1" done="0" start_date="733141" enddate="99999999" notify="0" endtime="-60" last_edited="1207695802"/>
-      <summary>test hand</summary>
-      <comment></comment>
+      <attribute id="1214411262" priority="1" done="0" start_date="733218" enddate="99999999" notify="0" endtime="-60" last_edited="1214411280"/>
+      <summary>sueca_hand_sort_cards</summary>
+      <comment>melhorar a ordena&#xE7;&#xE3;o das cartas.</comment>
+    </item>
+    <item>
+      <attribute id="1214411658" priority="1" done="0" start_date="733218" enddate="99999999" notify="0" endtime="-60" last_edited="1214411734"/>
+      <summary>sueca_deck_pop</summary>
+      <comment>extender a possibilidade de tirar cartas pela parte de baixo do baralho
+(teria &#xFA;tilidade?!?)</comment>
+    </item>
+    <item>
+      <attribute id="1214423227" priority="1" done="1" start_date="733218" completed_date="733218" notify="0" last_edited="1214428372"/>
+      <summary>sueca_team_add_to_pilha</summary>
+      <comment/>
+    </item>
+    <item>
+      <attribute id="1214423239" priority="1" done="1" start_date="733218" completed_date="733218" notify="0" last_edited="1214428374"/>
+      <summary>sueca_team_remove_pilha</summary>
+      <comment/>
+    </item>
+    <item>
+      <attribute id="1214430871" priority="1" done="0" start_date="733218" enddate="99999999" notify="0" endtime="-60" last_edited="1214430871"/>
+      <summary>sueca_player_play</summary>
+      <comment/>
+    </item>
+    <item>
+      <attribute id="1208707882" priority="1" done="0" start_date="733152" enddate="99999999" notify="0" endtime="-60" last_edited="1214432518"/>
+      <summary>sueca_table_start  -&gt; game engine</summary>
+      <comment>implementar o motor de jogo</comment>
     </item>
   </category>
   <category title="Business" place="1"/>

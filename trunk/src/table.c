@@ -23,34 +23,37 @@
 struct _SuecaMesa
 {
 	SuecaBaralho *baralho;
-	GList *equipas; // 2 equipas
-	GList *jogadores; // 4 jogadores
-	GList *vaza; // 4 cartas
+	SuecaEquipa *equipa_1;
+	SuecaEquipa *equipa_2;
+	SuecaJogador *jogadores[SUECA_NUMBER_OF_PLAYERS];
+	SuecaCarta *vaza[SUECA_VAZA_MAX_SIZE];
+	SuecaCarta trunfo;
+	gint primeiro;
+	gint jogador;
 };
-
-void sueca_table_delete_equipas(gpointer data, gpointer user_data);
-void sueca_table_delete_vaza(gpointer data, gpointer user_data);
-
 
 SuecaMesa *
 sueca_table_new(const SuecaMesaInit *init)
 {
-	gint k;
+	if(init->team_1_name == NULL || init->team_2_name == NULL ||
+	   init->player_1_name == NULL || init->player_2_name == NULL ||
+	   init->player_3_name == NULL || init->player_4_name == NULL)
+		return NULL;
+	
 	SuecaMesa *mesa = g_new0 (SuecaMesa, 1);
 	
 	mesa->baralho = sueca_deck_new ();
 	
-	for (k = 0; k < SUECA_TABLE_NUMBER_OF_PLAYERS; k++)
-		mesa->jogadores = g_list_append(mesa->jogadores,
-									  sueca_player_new (init->player_name[k]));
-	for (k = 0; k < SUECA_NUMBER_OF_TEAMS; k++)
-		mesa->equipas = g_list_append(mesa->equipas,
-									sueca_team_new (init->team_name[k],
-													g_list_nth_data(mesa->jogadores,
-																	k),
-													g_list_nth_data(mesa->jogadores,
-																	k+2)));
-	mesa->vaza = NULL;
+	mesa->equipa_1 = sueca_team_new (init->team_1_name,
+									 (mesa->jogadores[0] = sueca_player_new (init->player_1_name)),
+									 (mesa->jogadores[2] = sueca_player_new (init->player_2_name)));
+	mesa->equipa_2 = sueca_team_new (init->team_2_name,
+									 (mesa->jogadores[1] = sueca_player_new (init->player_3_name)),
+									 (mesa->jogadores[3] = sueca_player_new (init->player_4_name)));
+	
+	mesa->trunfo = -1;
+	mesa->primeiro = -1;
+	mesa->jogador = -1;
 	
 	return mesa;
 }
@@ -58,40 +61,53 @@ sueca_table_new(const SuecaMesaInit *init)
 void
 sueca_table_delete(SuecaMesa *mesa)
 {
+	if(mesa == NULL)
+		return;
+	
 	sueca_deck_delete (mesa->baralho);
-	g_list_foreach(mesa->equipas, sueca_table_delete_equipas, NULL);
-	g_list_foreach(mesa->vaza, sueca_table_delete_vaza, NULL);
+	sueca_team_delete (mesa->equipa_1);
+	sueca_team_delete (mesa->equipa_2);
+	gint k;
+	for(k = 0; k < SUECA_VAZA_MAX_SIZE; k++)
+		sueca_cards_delete (mesa->vaza[k]);
 	g_free(mesa);
 }
 
 void
-sueca_table_delete_equipas(gpointer data, gpointer user_data)
+sueca_table_start (SuecaMesa *mesa)
 {
-	sueca_team_delete ((SuecaEquipa*) data);
+	if(mesa == NULL)
+		return;
+
+	g_random_set_seed(time(NULL));
+	
+	sueca_deck_shuffle (mesa->baralho);
+	sueca_deck_cut (mesa->baralho);
+	
+	mesa->primeiro = g_random_int_range(0, SUECA_NUMBER_OF_PLAYERS);
+	
+	sueca_player_play (mesa->jogadores[mesa->primeiro], mesa->vaza, mesa->trunfo);
+	
 }
 
 void
-sueca_table_delete_vaza(gpointer data, gpointer user_data)
+sueca_table_print(const SuecaMesa *mesa)
 {
-	sueca_cards_delete ((SuecaCarta*) data);
-}
-
-void
-sueca_table_print(SuecaMesa *mesa)
-{
+	if(mesa == NULL)
+		return;
+	
 	gint k;
 	
-	g_printf("MESA\n");
+	g_printf("**MESA**\n");
 	g_printf("BARALHO\n");
 	sueca_deck_print (mesa->baralho);
-	g_printf("EQUIPAS\n");
-	for(k = 0; k < SUECA_NUMBER_OF_TEAMS; k++)
-		sueca_team_print (g_list_nth_data(mesa->equipas, k));
-	g_printf("JOGADORES\n");
-	for(k = 0; k < SUECA_TABLE_NUMBER_OF_PLAYERS; k++)
-		sueca_player_print (g_list_nth_data(mesa->jogadores, k));
+	
+	g_printf("\nEQUIPAS\n");
+	sueca_team_print (mesa->equipa_1);
+	sueca_team_print (mesa->equipa_2);
+	
 	g_printf("\nVAZA\n");
-	for(k = 0; k < SUECA_VAZA_SIZE; k++)
-		sueca_cards_print (g_list_nth_data(mesa->vaza, k));
-	g_printf("\n");
+	for(k = 0; k < SUECA_VAZA_MAX_SIZE; k++)
+		sueca_cards_print (mesa->vaza[k]);
+	g_printf("\n");		
 }
