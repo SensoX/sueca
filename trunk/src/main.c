@@ -33,6 +33,7 @@
 #include <hand.h>
 #include <player.h>
 #include <table.h>
+#include <trick.h>
 
 
 
@@ -87,8 +88,13 @@ main(int argc, char *argv[])
  */
 /* 	// deck
  * 	SuecaBaralho *sb = sueca_deck_new ();
+ * 	printf("\n");
+ * 	sueca_deck_print (sb);
  * 	sueca_deck_shuffle (sb);
- * 	//sueca_deck_cut (sb);
+ * 	printf("\n");
+ * 	sueca_deck_print (sb);
+ * 	sueca_deck_cut (sb);
+ * 	printf("\n");
  * 	sueca_deck_print (sb);
  * 	SuecaCarta *sbc = sueca_deck_pop (sb);
  * 	printf("\n");
@@ -108,6 +114,40 @@ main(int argc, char *argv[])
  * 	sueca_hand_sort (sm);
  * 	sueca_hand_print (sm);
  */
+	// player // equipa
+	SuecaJogador *j1 = sueca_player_new ("ja");
+	SuecaJogador *j2 = sueca_player_new ("je");
+	SuecaJogador *j3 = sueca_player_new ("jo");
+	SuecaJogador *j4 = sueca_player_new ("ju");
+	
+	sueca_player_print (j1);
+	g_printf("\n");
+	sueca_player_print (j2);
+	g_printf("\n");
+	sueca_player_print (j3);
+	g_printf("\n");
+	sueca_player_print (j4);
+	g_printf("\n");
+	
+	SuecaEquipa *e1 = sueca_team_new ("ae", j1, j2);
+	sueca_team_inc_vitorias (e1, 4);
+	sueca_team_add_vaza (e1, sueca_cards_new (1, 2));
+	sueca_team_print (e1);
+	
+	g_printf("\n");
+	SuecaEquipa *e2 = sueca_team_new ("ou", j3, j4);
+	sueca_team_inc_vitorias (e2, 1);
+	sueca_team_add_vaza (e2, sueca_cards_new (3, 2));
+	sueca_team_print (e2);
+	
+	g_printf("\n");
+	SuecaMesa *m = sueca_table_new (e1, e2);
+	sueca_table_print (m);
+	
+	sueca_table_delete (m);
+	//sueca_team_delete (e1);
+	//sueca_player_delete (j1);
+	//sueca_player_delete (j2);
 	
 
 	

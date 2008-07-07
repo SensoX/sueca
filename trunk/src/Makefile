@@ -46,7 +46,7 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_sueca_OBJECTS = cards.$(OBJEXT) deck.$(OBJEXT)  hand.$(OBJEXT) player.$(OBJEXT) table.$(OBJEXT) team.$(OBJEXT) main.$(OBJEXT)
+am_sueca_OBJECTS = cards.$(OBJEXT) deck.$(OBJEXT) hand.$(OBJEXT) player.$(OBJEXT) table.$(OBJEXT) team.$(OBJEXT) trick.$(OBJEXT) main.$(OBJEXT)
 sueca_OBJECTS = $(am_sueca_OBJECTS)
 am__DEPENDENCIES_1 =
 sueca_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -254,6 +254,8 @@ sueca_SOURCES = \
 	table.h \
 	team.c \
 	team.h \
+	trick.c \
+	trick.h \
 	main.c
 
 sueca_LDFLAGS = \
@@ -337,6 +339,7 @@ include ./$(DEPDIR)/hand.Po
 include ./$(DEPDIR)/player.Po
 include ./$(DEPDIR)/table.Po
 include ./$(DEPDIR)/team.Po
+include ./$(DEPDIR)/trick.Po
 include ./$(DEPDIR)/main.Po
 
 .c.o:

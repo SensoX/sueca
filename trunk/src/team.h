@@ -27,18 +27,19 @@
 #include <glib/gprintf.h>
 
 #include <player.h>
+#include <trick.h>
 
 typedef struct _SuecaEquipa SuecaEquipa;
 
 SuecaEquipa *sueca_team_new(const gchar *, SuecaJogador *, SuecaJogador *);
 void sueca_team_delete(SuecaEquipa *);
-void sueca_team_set_name(SuecaEquipa *, const gchar *);
 gchar *sueca_team_get_name(const SuecaEquipa *);
-void sueca_team_inc_vitorias(SuecaEquipa *);
+void sueca_team_inc_vitorias(SuecaEquipa *, const gint);
 void sueca_team_reset_vitorias(SuecaEquipa *);
 int sueca_team_get_vitorias(const SuecaEquipa *);
-void sueca_team_add_vaza(SuecaEquipa *, GList *);
+void sueca_team_add_vaza(SuecaEquipa *, const SuecaCarta *);
 GList *sueca_team_remove_vazas(SuecaEquipa *);
+SuecaJogador *sueca_team_get_player(const SuecaEquipa *, const gint);
 
 void sueca_team_print(const SuecaEquipa *);
 

@@ -32,10 +32,9 @@ typedef struct _SuecaJogador SuecaJogador;
 
 SuecaJogador *sueca_player_new(const gchar *);
 void sueca_player_delete(SuecaJogador *);
-void sueca_player_set_name(SuecaJogador *, const gchar *);
 gchar *sueca_player_get_name(const SuecaJogador *);
 void sueca_player_set_hand(SuecaJogador *, SuecaMao *);
-SuecaCarta *sueca_player_play(SuecaJogador*, SuecaCarta **, SuecaCarta *);
+//SuecaCarta *sueca_player_play(SuecaJogador*, SuecaCarta **, SuecaCarta *);
 
 void sueca_player_print(const SuecaJogador *);
 

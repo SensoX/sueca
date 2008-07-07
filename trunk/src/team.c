@@ -23,19 +23,17 @@
 struct _SuecaEquipa
 {
 	gchar *name;
-	SuecaJogador *jogador_1;
-	SuecaJogador *jogador_2;
-	GList *vazas;
+	SuecaJogador *jogador[2];
+	SuecaVaza *vazas;
 	int vitorias;
 };
 
-void sueca_team_delete_cards(gpointer, gpointer);
-void sueca_team_add_vaza_cards(gpointer, gpointer);
+void sueca_team_set_name(SuecaEquipa *, const gchar *);
 
 SuecaEquipa *
-sueca_team_new(const gchar *name, SuecaJogador *player_1, SuecaJogador *player_2)
+sueca_team_new(const gchar *name, SuecaJogador *player_0, SuecaJogador *player_1)
 {
-	if(name == NULL || player_1 == NULL || player_2 == NULL)
+	if(name == NULL || player_0 == NULL || player_1 == NULL)
 		return NULL;
 	
 	SuecaEquipa *equipa;
@@ -45,10 +43,10 @@ sueca_team_new(const gchar *name, SuecaJogador *player_1, SuecaJogador *player_2
 	equipa->name = g_new0(gchar, SUECA_TEAM_NAME_SIZE);
 	sueca_team_set_name(equipa, name);
 	
-	equipa->jogador_1 = player_1;
-	equipa->jogador_2 = player_2;
+	equipa->jogador[0] = player_0;
+	equipa->jogador[1] = player_1;
 	
-	equipa->vazas = NULL;
+	equipa->vazas = sueca_trick_new();
 	
 	equipa->vitorias = 0;
 	
@@ -62,16 +60,10 @@ sueca_team_delete(SuecaEquipa *equipa)
 		return;
 	
 	g_free(equipa->name);
-	sueca_player_delete (equipa->jogador_1);
-	sueca_player_delete (equipa->jogador_2);
-	g_list_foreach(equipa->vazas, sueca_team_delete_cards, NULL);
+	sueca_player_delete (equipa->jogador[0]);
+	sueca_player_delete (equipa->jogador[1]);
+	sueca_trick_delete (equipa->vazas);
 	g_free(equipa);
-}
-
-void
-sueca_team_delete_cards(gpointer data, gpointer user_data)
-{
-	sueca_cards_delete ((SuecaCarta*) data);
 }
 
 void
@@ -97,12 +89,12 @@ sueca_team_get_name(const SuecaEquipa *equipa)
 }
 
 void
-sueca_team_inc_vitorias(SuecaEquipa *equipa)
+sueca_team_inc_vitorias(SuecaEquipa *equipa, const gint num)
 {
 	if(equipa == NULL)
 		return;
 	
-	equipa->vitorias++;
+	equipa->vitorias += num;
 }
 
 void
@@ -124,29 +116,25 @@ sueca_team_get_vitorias(const SuecaEquipa *equipa)
 }
 
 void
-sueca_team_add_vaza(SuecaEquipa *equipa, GList *vaza)
+sueca_team_add_vaza(SuecaEquipa *equipa, const SuecaCarta *carta)
 {
-	if(equipa == NULL || vaza == NULL)
+	if(equipa == NULL || carta == NULL)
 		return;
 	
-	g_list_foreach(vaza, sueca_team_add_vaza_cards, equipa->vazas);
+	sueca_trick_append (equipa->vazas, carta);
 }
 
-void
-sueca_team_add_vaza_cards(gpointer data, gpointer user_data)
-{
-	user_data = g_list_append (user_data, data);
-}
-
-GList *
-sueca_team_remove_vazas(SuecaEquipa *equipa)
+SuecaJogador *
+sueca_team_get_player(const SuecaEquipa *equipa, const gint num_jogador)
 {
 	if(equipa == NULL)
 		return NULL;
 	
-	GList *gltemp = equipa->vazas;
-	equipa->vazas = NULL;
-	return gltemp;
+	if(num_jogador == 0)
+		return equipa->jogador[0];
+	if(num_jogador == 1)
+		return equipa->jogador[1];
+	return NULL;
 }
 
 void
@@ -155,23 +143,11 @@ sueca_team_print(const SuecaEquipa *equipa)
 	if(equipa == NULL)
 		return;
 	
-	GList *iter;
-	
-	g_printf("\"%s\", ", equipa->name);
-	
-	g_printf("[");
-	sueca_player_print(equipa->jogador_1);
+	g_printf("[\"%s\", [", equipa->name);
+	sueca_player_print(equipa->jogador[0]);
 	g_printf(", ");
-	sueca_player_print(equipa->jogador_2);
+	sueca_player_print(equipa->jogador[1]);
 	g_printf("], ");
-	
-	g_printf("[");
-	for(iter = equipa->vazas; iter != NULL; iter = g_list_next(iter))
-	{
-		sueca_cards_print(g_list_nth_data (iter, 0));
-		g_printf(" ");
-	}
-	g_printf("], ");
-	
-	g_printf("(%d)", equipa->vitorias);
+	sueca_trick_print (equipa->vazas);
+	g_printf(", %d]", equipa->vitorias);
 }

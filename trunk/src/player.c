@@ -26,6 +26,8 @@ struct _SuecaJogador
 	SuecaMao *mao;
 };
 
+void sueca_player_set_name(SuecaJogador *, const gchar *);
+
 SuecaJogador *
 sueca_player_new(const gchar *name)
 {
@@ -86,12 +88,13 @@ sueca_player_set_hand(SuecaJogador *jogador, SuecaMao *mao)
 	jogador->mao = mao;
 }
 
-SuecaCarta *
-sueca_player_play(SuecaJogador* jogador, SuecaCarta *vaza[], SuecaCarta *trunfo)
-{
-	
-	return NULL;
-}
+/* SuecaCarta *
+ * sueca_player_play(SuecaJogador* jogador, SuecaCarta *vaza[], SuecaCarta *trunfo)
+ * {
+ * 	
+ * 	return NULL;
+ * }
+ */
 
 void
 sueca_player_print(const SuecaJogador *jogador)
