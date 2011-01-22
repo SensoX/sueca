@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   preserveAspectRatio="xMinYMin meet"
+   viewBox="0 0 200 250"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Playing_card_back.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   width="100%"
+   height="100%">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 125 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="200 : 125 : 1"
+       inkscape:persp3d-origin="100 : 83.333333 : 1"
+       id="perspective16" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="-20.669401"
+     inkscape:cy="153.52484"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:grid-points="true"
+     inkscape:window-width="977"
+     inkscape:window-height="722"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     width="200px"
+     height="250px"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       id="GridFromPre046Settings"
+       type="xygrid"
+       originx="0px"
+       originy="0px"
+       spacingx="1px"
+       spacingy="1px"
+       color="#0000ff"
+       empcolor="#0000ff"
+       opacity="0.2"
+       empopacity="0.4"
+       empspacing="5" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 199,10 C 199,5 195,1 190,1 L 10,1 C 5,1 1,5 1,10 L 1,240 C 1,245 5,249 10,249 L 190,249 C 195,249 199,245 199,240 L 199,10 z "
+       id="path3229"
+       sodipodi:nodetypes="ccccccccc" />
+    <path
+       style="fill:#666666"
+       d="m 4.9049133,244.76071 -2.174314,-2.31445 0,-117.68555 C 2.7305993,9.5339027 2.7712189,7.0345423 4.6748224,5.1309388 5.7441452,4.061616 8.1066452,2.917561 9.9248224,2.5885943 11.742999,2.2596276 53.605731,2.122028 102.95312,2.2828174 l 89.72251,0.2923445 2.27749,2.2777778 2.27748,2.2777778 0,118.0605725 0,118.06058 -2.36078,1.91164 c -2.28648,1.85148 -5.27913,1.91165 -95.075691,1.91165 l -92.7149016,0 -2.1743141,-2.31445 z"
+       id="path2964" />
+    <path
+       style="fill:#cccccc"
+       d="M 5.344867,244.2395 2.459135,241.18237 3.1396756,125.87877 C 3.5139729,62.461783 4.0471542,9.3998214 4.324523,7.9632966 4.6154161,6.4567274 5.8859127,4.8697939 7.3267674,4.2132966 9.1358916,3.3890044 34.995049,3.07516 101.10334,3.07516 l 91.27863,0 2.17845,2.3188511 2.17845,2.3188511 -0.25414,117.9177078 -0.25413,117.9177 -2.5,1.1725 c -1.81915,0.85317 -27.41915,1.36359 -94.000001,1.87417 l -91.5,0.70168 -2.885732,-3.05712 0,0 z"
+       id="path2815" />
+    <path
+       style="fill:#cccccc"
+       d="M 5.8281061,243.67576 2.7074524,240.45606 3.7380185,124.01561 C 4.7312815,11.789923 4.8369202,7.517792 6.6564787,5.9902659 8.3197465,4.5939462 16.427918,4.3262358 74.802454,3.7402659 111.2444,3.3744576 152.38286,3.07516 166.22125,3.07516 l 25.16072,0 2.23848,2.3827473 2.23847,2.3827473 -0.0954,117.3485254 c -0.0611,75.19087 -0.44759,117.70069 -1.07567,118.32877 -1.22805,1.22805 -44.59344,2.23066 -124.598131,2.88072 l -61.1409591,0.49679 -3.1206538,-3.2197 z"
+       id="path2817" />
+  </g>
+</svg>

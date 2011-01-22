@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#js
+yui-compressor sueca.js -v -o sueca.min.js
+yui-compressor sueca-ui.js -v -o sueca-ui.min.js
+yui-compressor sueca-util.js -v -o sueca-util.min.js
+
+#css
+yui-compressor sueca-ui.css -v -o sueca-ui.min.css

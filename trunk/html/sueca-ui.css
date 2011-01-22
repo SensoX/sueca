@@ -1,0 +1,32 @@
+/* Jogador 1 */
+#j1, #j1j, #j1n {
+	-moz-transform: rotate(-90deg);
+}
+
+/* Jogador 2 */
+#j2, #j2j {
+	-moz-transform: rotate(180deg);
+}
+
+/* Jogador 3 */
+#j3, #j3j, #j3n {
+	-moz-transform: rotate(90deg);
+}
+
+/* Equipa 1 */
+#e1 {
+	-moz-transform: rotate(90deg);
+}
+
+/* Mesa */
+#da {
+	-moz-border-radius: 2%;
+}
+
+#db {
+	-moz-border-radius: 1%;
+}
+
+#df {
+	-moz-border-radius: 10%;
+}

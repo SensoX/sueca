@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta name="author" content="Marco Monteiro" >
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+		<meta http-equiv="Content-Script-Type" content="text/javascript" >
+		<meta http-equiv="Content-Style-Type" content="text/css" >
+		<script type="text/javascript" src="./jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="./sueca.js"></script>
+		<script type="text/javascript" src="./sueca-util.js"></script>
+		<script type="text/javascript" src="./sueca-ui-texto.js"></script>
+		<title>Sueca</title>
+	</head>
+	<body style="font-size:12px">
+		<table width="100%">
+			<!--1ª linha-->
+			<tr height="100px">
+				<td width="33%" align="center">
+					<table width="250px" border="1px">
+						<tr>
+							<td id="e1_nome" align="center"></td>
+						</tr>
+						<tr>
+							<td id="e1_pontos" align="center" />
+						</tr>
+					</table>
+				</td>
+				<td width="33%">
+					<table height="100%" width="100%" border="1px">
+						<tr>
+							<td align="center">
+								<label id="j2_nome" />
+							</td>
+						</tr>
+						<tr height="100%">
+							<td id="j2_mao" align="center" valign="top" />
+						</tr>
+					</table>
+				</td>
+				<td width="33%" align="center">
+					<table height="80%" width="95%" border="1px" style="font-size:8.5px">
+						<tr height="25%">
+							<td colspan="3" align="center">Última Jogada</td>
+						</tr>						
+						<tr height="25%">
+							<td width="33%" />
+							<td id="j2_jogado" width="33%" align="center" />
+							<td width="33%" />
+						</tr>
+						<tr height="25%">
+							<td id="j3_jogado" align="center" />
+							<td />
+							<td id="j1_jogado" align="center" />
+						</tr>
+						<tr height="25%">
+							<td />
+							<td id="j0_jogado" align="center" />
+							<td />
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!--2ª linha-->
+			<tr height="100px">
+				<td>
+					<table height="100%" width="100%" border="1px">
+						<tr>
+							<td align="center">
+								<label id="j3_nome" />
+							</td>
+						</tr>
+						<tr height="100%">
+							<td id="j3_mao" align="center" valign="top" />
+						</tr>
+					</table>
+				</td>
+				<td align="center">
+					<table height="100%" width="100%" border="1px">
+						<tr height="33%">
+							<td width="33%" />
+							<td id="j2_mesa" width="33%" align="center" />
+							<td width="33%" />
+						</tr>
+						<tr height="33%">
+							<td id="j3_mesa" align="center" />
+							<td />
+							<td id="j1_mesa" align="center" />
+						</tr>
+						<tr height="33%">
+							<td />
+							<td id="j0_mesa" align="center" />
+							<td />
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table height="100%" width="100%" border="1px">
+						<tr>
+							<td align="center">
+								<label id="j1_nome" />
+							</td>
+						</tr>
+						<tr height="100%">
+							<td id="j1_mao" align="center" valign="top" />
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!--3ª linha-->
+			<tr height="125px">
+				<td align="center">
+					<table width="150px" border="1px">
+						<tr>
+							<td align="center">Trunfo</td>
+						</tr>
+						<tr>
+							<td id="trunfo_carta" align="center" />
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table height="100%" width="100%" border="1px">
+						<tr>
+							<td align="center">
+								<label id="j0_nome" />
+							</td>
+						</tr>
+						<tr height="100%">
+							<td id="j0_mao" align="center" valign="top" />
+						</tr>
+						<tr>
+							<td align="center">
+								<form id="jogar_carta">
+									<input type="text" id="j0_text_carta" />
+									<input type="submit" id="j0_submit_carta" value="Jogar"/>
+								</form>
+							</td>
+						</tr>
+					</table>
+				<td align="center">
+					<table width="250px" border="1px">
+						<tr>
+							<td id="e0_nome" align="center" />
+						</tr>
+						<tr>
+							<td id="e0_pontos" align="center" />
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
